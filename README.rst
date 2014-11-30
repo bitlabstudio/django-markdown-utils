@@ -1,7 +1,10 @@
 Django Markdown Utils
-============
+=====================
 
-A reusable Django app with some useful markdown utilities
+A reusable Django app with some useful markdown utilities.
+
+This should mainly serve as an alternative to the `django.contrib.markup`
+module which has been removed in Django 1.5.
 
 Installation
 ------------
@@ -29,35 +32,27 @@ Add ``markdown_utils`` to your ``INSTALLED_APPS``
         'markdown_utils',
     )
 
-Add the ``markdown_utils`` URLs to your ``urls.py``
-
-.. code-block:: python
-
-    urlpatterns = patterns('',
-        ...
-        url(r'^/', include('markdown_utils.urls')),
-    )
-
 Before your tags/filters are available in your templates, load them by using
 
 .. code-block:: html
 
 	{% load markdown_utils_tags %}
 
+Templatetags
+------------
 
-Don't forget to migrate your database
+render_markdown
++++++++++++++++
 
-.. code-block:: bash
+Usage:
 
-    ./manage.py migrate markdown_utils
+.. code-block:: html
 
+    {% render_markdown some_text as markdown_text %}
+    {% render_markdown some_text is_safe=True as markdown_text %}
+    {{ markdown_text }}
 
-Usage
------
-
-TODO: Describe usage or point to docs. Also describe available settings and
-templatetags.
-
+Renders some given Markdown text to it's HTML representation.
 
 Contribute
 ----------
